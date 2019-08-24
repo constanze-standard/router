@@ -1,0 +1,24 @@
+{
+    "name": "constanze-standard/router",
+    "description": "A lightly php router.",
+    "keywords": ["router", "route", "dispatcher", "collection"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Speed Sonic",
+            "email": "blldxt@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.5.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "ConstanzeStandard\\Route\\": "src"
+        }
+    }
+}
