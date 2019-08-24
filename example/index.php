@@ -4,12 +4,12 @@
  * JUST FOR TEST!
  */
 
-use ConstanzeStandard\Route\Collection;
+use ConstanzeStandard\Route\Collector;
 use ConstanzeStandard\Route\Dispatcher;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$collection = new Collection([
+$collection = new Collector([
     'withCache' => __DIR__ . '/cache_file.php'
 ]);
 $collection->attach('get', '/a', 'controller', ['a' => 1, 'b' => 2, 'c' => 3]);
