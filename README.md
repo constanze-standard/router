@@ -101,11 +101,11 @@ use ConstanzeStandard\Route\Dispatcher;
 ```php
 use ConstanzeStandard\Route\Dispatcher;
 
-[Dispatcher::STATUS_ERROR, Dispatcher::ERROR_ALLOWED_METHODS, ['GET', 'POST']];
+[Dispatcher::STATUS_ERROR, Dispatcher::ERROR_METHOD_NOT_ALLOWED, ['GET', 'POST']];
 ```
 Dispatcher 在查询一条 route，如果 URL 符合条件，则会进一步检查 Http Method, 这时，如果 Method 不匹配，并且剩余的 route 均不匹配，则会返回数组向：
 1. 匹配错误的状态码：`Dispatcher::STATUS_ERROR`.
-2. 错误类型：`Dispatcher::ERROR_ALLOWED_METHODS`
+2. 错误类型：`Dispatcher::ERROR_METHOD_NOT_ALLOWED`
 3. 这个 URL 所支持的 Http Method.
 
 ### Collector 缓存

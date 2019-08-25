@@ -123,7 +123,7 @@ class DispatcherTest extends AbstractTest
         $result = $matcher->dispatch('post', '/static');
         $this->assertEquals($result, [
             Dispatcher::STATUS_ERROR,
-            Dispatcher::ERROR_ALLOWED_METHODS,
+            Dispatcher::ERROR_METHOD_NOT_ALLOWED,
             ['get']
         ]);
     }
@@ -136,7 +136,7 @@ class DispatcherTest extends AbstractTest
         $result = $matcher->dispatch('post', '/variable/{name}');
         $this->assertEquals($result, [
             Dispatcher::STATUS_ERROR,
-            Dispatcher::ERROR_ALLOWED_METHODS,
+            Dispatcher::ERROR_METHOD_NOT_ALLOWED,
             ['get']
         ]);
     }

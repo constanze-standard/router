@@ -24,7 +24,7 @@ class Dispatcher implements DispatcherInterface
     const STATUS_OK = 1;
     const STATUS_ERROR = 2;
 
-    const ERROR_ALLOWED_METHODS = 1;
+    const ERROR_METHOD_NOT_ALLOWED = 1;
     const ERROR_NOT_FOUND = 2;
 
     /**
@@ -93,7 +93,7 @@ class Dispatcher implements DispatcherInterface
         }
 
         if (!empty($allowedMethods)) {
-            return [static::STATUS_ERROR, static::ERROR_ALLOWED_METHODS, $allowedMethods];
+            return [static::STATUS_ERROR, static::ERROR_METHOD_NOT_ALLOWED, $allowedMethods];
         }
 
         return [static::STATUS_ERROR, static::ERROR_NOT_FOUND];
