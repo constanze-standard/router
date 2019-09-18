@@ -140,4 +140,19 @@ class DispatcherTest extends AbstractTest
             ['get']
         ]);
     }
+
+    public function testRegexVariableDifine()
+    {
+        $collection = new Collector();
+        $url = urlencode('/b/123/abc');
+        $collection->attach('get', '/a/{name|\w+}/abc', 'ctrl1', 'data1');
+        $collection->attach('get', '/b/{age|\d+}/{name|[a-c]+}', 'ctrl2', 'data2');
+        $matcher = new Dispatcher($collection);
+        $this->setProperty($matcher, 'chunkSize', 2);
+        $result = $matcher->dispatch('get', $url);
+        $this->assertEquals($result, [
+            Dispatcher::STATUS_OK,
+            'ctrl2', 'data2', ['age' => '123', 'name' => 'abc']
+        ]);
+    }
 }

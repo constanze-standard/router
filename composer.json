@@ -4,6 +4,8 @@
     "keywords": ["router", "route", "dispatcher", "collection"],
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Speed Sonic",
