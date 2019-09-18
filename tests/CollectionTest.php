@@ -71,7 +71,7 @@ class CollectionTest extends AbstractTest
         $collection->attach('post', '/b', 'ctrl', 'data');
         $collection->attach('post', '/variable/{name}', 'ctrl', 'data');
         $result = $collection->createCache($cacheName);
-        list($statics, $vars) = require($cacheName);
+        list($statics, $vars) = unserialize(require($cacheName));
         $this->assertEquals($statics['post'][0], ['/b', 0, 'data', false]);
         $this->assertEquals($vars['post'][0], ['/variable/{name}', 1, 'data', ['name']]);
         $this->assertTrue($result);

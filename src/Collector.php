@@ -209,7 +209,8 @@ class Collector implements CollectionInterface
     public function loadCache($cacheFile)
     {
         if (is_file($cacheFile) && is_readable($cacheFile)) {
-            list($this->staticMap, $this->variableMap) = require($cacheFile);
+            $content = require($cacheFile);
+            list($this->staticMap, $this->variableMap) = unserialize($content);
         } else {
             throw new \RuntimeException('Cache file does not exist or not readable.');
         }
@@ -226,12 +227,10 @@ class Collector implements CollectionInterface
         if (! is_writable(dirname($cacheFile))) {
             throw new \RuntimeException('Cache directory does not writable.');
         }
+        $content = serialize([$this->staticMap, $this->variableMap]);
         $bytes = file_put_contents(
             $cacheFile,
-            '<?php return array(' .
-                var_export($this->staticMap, true) . ', ' .
-                var_export($this->variableMap, true) .
-            ');'
+            "<?php return '$content';"
         );
         return (bool)$bytes;
     }

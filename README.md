@@ -129,7 +129,7 @@ $collector = new Collector([
 ```
 `withCache` 选项的默认值是 false（不使用缓存）。我们将 `withCache` 设置为缓存文件的路径开启缓存。当缓存文件存在时，collector 从缓存文件中读取数据，当缓存文件不存在时，collector 会创建缓存文件，并将数据写入文件。所以缓存文件所在的目录必须可写。
 
-collector 缓存一定程度上缓解了数据装载时的消耗，但 handler 将 `Closure` 作为必要的数据类型无法被缓存，所以 collector 每次仍需构建一份 `[id => handler]` 形式的数组。
+collector 缓存一定程度上缓解了数据装载时的消耗，但 handler 将 `\Closure` 作为必要的数据类型无法被缓存，所以 collector 每次仍需构建一份 `[id => handler]` 形式的数组。而其他数据也不应该包含 `\Closure` 类型的对象。
 
 ### 一个完整的案例
 ```php
