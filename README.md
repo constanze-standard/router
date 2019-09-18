@@ -45,9 +45,16 @@ $collector->attach('GET', '/user/{id}', function() {
 ```
 用 `ConstanzeStandard\Route\Collector::attach` 方法向 Collector 中添加一条 route 信息，也就是attach 方法接收的 4 个参数：
 1. methods: 请求的 http 方法。这个参数可以是字符串或数组，代表本条 route 支持的一个或多个 http method.
-2. pattern: URL 的匹配模式。pattern 支持解析 URL 中的参数，如 `/user/{id}`, `{id}` 位置对应的内容将会被提取出来，并在命中请求时返回。
+2. pattern: URL 的匹配模式。pattern 支持解析 URL 中的参数，如 `/user/{id}`, `{id}` 位置对应的内容将会被提取出来，并在命中请求时返回，被标记的参数支持正则表达式过滤。
 3. handler: 处理程序。在常见的路由场景中，往往需要预存一个 route 的处理程序，它可以是 一个闭包, 函数或数组。
 4. data: 绑定在 route 上的附加数据，理论上可以是任何类型的数据，但如果你要使用 collector 的缓存机制，则 data 必须符合 var_export 函数对数据的要求。
+
+### 对 URL 参数进行正则表达式过滤
+被标记的参数支持正则表达式过滤，参数名称与过滤规则使用符号 `|` 分隔：
+```php
+$collector->attach('GET', '/user/{id|\d+}', 'target', 'additional data');
+```
+上例中，对参数 `id` 使用了正则过滤，如果参数不是数字，则会判定为不匹配。
 
 ### 根据附加数据查询 route
 `ConstanzeStandard\Route\Collector` 提供了 `getRoutesByData` 方法，用于根据 route 的附加数据获取一个或多个 route 信息。这对路由定位应用很有帮助。

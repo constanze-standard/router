@@ -110,6 +110,9 @@ class Dispatcher implements DispatcherInterface
     {
         $params = [];
         foreach ($variables as $index => $variable) {
+            if (strpos($variable, '|') !== false) {
+                $variable = preg_replace('/\|.*/', '', $variable);
+            }
             $params[$variable] = $values[$index];
         }
         return $params;
@@ -120,8 +123,6 @@ class Dispatcher implements DispatcherInterface
      * This part has been referred to nikic/fast-route
      *
      * @return string
-     * 
-     * @see https://github.com/nikic/FastRoute/blob/master/src/DataGenerator/GroupCountBased.php
      */
     private function getRegexAndMap($variableMap)
     {
@@ -138,7 +139,8 @@ class Dispatcher implements DispatcherInterface
         }
 
         $pattern = implode('|', $patterns);
-        $regex = preg_replace('/{[^\/]+}/', '([^/]+)', '~^(?|' . $pattern . ')$~');
+        $regex = preg_replace('/{[^\/^|]+\|(?=[^\/]+)([^\/]+)}/', '(${1})', '~^(?|' . $pattern . ')$~');
+        $regex = preg_replace('/{[^\/]+}/', '([^/]+)', $regex);
         return [$regex, $map];
     }
 }
