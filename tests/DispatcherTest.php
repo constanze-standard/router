@@ -146,7 +146,7 @@ class DispatcherTest extends AbstractTest
         $collection = new Collector();
         $url = urlencode('/b/123/abc');
         $collection->attach('get', '/a/{name|\w+}/abc', 'ctrl1', 'data1');
-        $collection->attach('get', '/b/{age|\d+}/{name|[a-c]+}', 'ctrl2', 'data2');
+        $collection->attach('get', '/b/{age|\d+}/{name|[d-e]+|[a-c]+}', 'ctrl2', 'data2');
         $matcher = new Dispatcher($collection);
         $this->setProperty($matcher, 'chunkSize', 2);
         $result = $matcher->dispatch('get', $url);

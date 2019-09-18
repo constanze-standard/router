@@ -13,7 +13,7 @@ $collection = new Collector([
     // 'withCache' => __DIR__ . '/cache_file.php'
 ]);
 
-$collection->attach('get', '/a/{name|[a-z]+}/{age|\d+}', 'controller1', ['a' => 1, 'b' => 2, 'c' => 3]);
+$collection->attach('get', '/a/{name|[a-z]+}/{age|\d+|[0-3]+}', 'controller1', ['a' => 1, 'b' => 2, 'c' => 3]);
 $collection->attach('get', '/a/{name|\d+}', 'controller2', ['a' => 1, 'b' => 2, 'c' => 3]);
 $collection->attach('get', '/a/{name|[sad]+}', 'controller3', ['a' => 1, 'b' => 2, 'c' => 3]);
 $collection->attach('get', '/b/{name}', 'controller4', ['a' => 1, 'b' => 2, 'c' => 3]);

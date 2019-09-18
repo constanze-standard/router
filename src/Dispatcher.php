@@ -111,7 +111,7 @@ class Dispatcher implements DispatcherInterface
         $params = [];
         foreach ($variables as $index => $variable) {
             if (strpos($variable, '|') !== false) {
-                $variable = preg_replace('/(\|.*)?/', '', $variable);
+                $variable = preg_replace('/\|.*/', '', $variable);
             }
             $params[$variable] = $values[$index];
         }
@@ -139,7 +139,7 @@ class Dispatcher implements DispatcherInterface
         }
 
         $pattern = implode('|', $patterns);
-        $regex = preg_replace('/{[^\/]+\|(?=[^\/]+)([^\/]+)}/', '(${1})', '~^(?|' . $pattern . ')$~');
+        $regex = preg_replace('/{[^\/^|]+\|(?=[^\/]+)([^\/]+)}/', '(${1})', '~^(?|' . $pattern . ')$~');
         $regex = preg_replace('/{[^\/]+}/', '([^/]+)', $regex);
         return [$regex, $map];
     }
